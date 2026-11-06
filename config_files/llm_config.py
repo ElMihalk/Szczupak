@@ -1,9 +1,13 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+from typing import List
+
+class WordItem(BaseModel):
+    japanes_word: str = Field(description="The word in Japanese kanji or kana.")
+    reading: str = Field(description="The hiragana reading of the word.")
+    translation: str = Field(description="The translation of the word.")
 
 class VocabularyOutput(BaseModel):
-    japanes_word: str
-    reading: str
-    translation: str
+    items: List[WordItem]
 
 
 class LLMConfig:
@@ -16,14 +20,14 @@ class LLMConfig:
         self.translation_language = translation_language
         self.model = model
         self.system_prompt = f"""
-            You are perfectly capable of reading a PDF and image files contents and providing a json output according to the provided schema.
-            The input files 
-            The data you are looking for is the Japanese vocabulary that will be later used for educational purposes. 
+            You are tasked with reading a PDF and image files contents and providing a json output according to the provided schema and the rules specified below.
+            The PDF files will be passed in form of a string.
             It is crucial that you extract all the vocabulary items without losses. 
-            You must find the Japanese vocabulary and format it according to the schema. 
+            CRITICAL: Each item must have exactly 3 fields named exactly: "japanese_word", "reading" and "translation".
+            You must ensure that the translation part is in {self.translation_language}.
             If {self.translation_language} translation is missing, you must provide it. 
             If a japanese_word contains kanji characters, the reading field is mandatory - you must provide the reading if it's missing.
-            You must ensure that the translation part is in {self.translation_language}.
+
             "examples": [
                 
                     "japanese_word": "増える",

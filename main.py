@@ -10,9 +10,10 @@ def collect_files(suffix: str = ".pdf"):
 
 if __name__ == "__main__":
     model_conf = LLMConfig()
-    ollama_client = OllamaClient()
+    ollama_client = OllamaClient(system_prompt=model_conf.system_prompt, model=model_conf.model, schema=model_conf.json_schema)
     
-    for file_path in collect_files(suffix=".pdf"):
+    for file_path in collect_files(suffix="4.pdf"):
+        print(f"File name: {file_path}")
         obj = PDFHandler(file_path)
         obj.extract_content()
         ollama_client.transform_pdf_content(obj.content)
