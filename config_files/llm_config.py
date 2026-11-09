@@ -1,10 +1,12 @@
 from pydantic import BaseModel, Field
 from typing import List
 
+
 class WordItem(BaseModel):
     japanes_word: str = Field(description="The word in Japanese kanji or kana.")
     reading: str = Field(description="The hiragana reading of the word.")
     translation: str = Field(description="The translation of the word.")
+
 
 class VocabularyOutput(BaseModel):
     items: List[WordItem]
