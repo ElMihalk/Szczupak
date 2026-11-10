@@ -26,3 +26,19 @@ class OllamaClient:
             },
         )
         print(result["response"])
+
+    def transform_image_content(self, file_path: str):
+        prompt = f"""
+        Process this file:
+        """
+        result = ollama.generate(
+            model=self.model,
+            prompt=prompt,
+            images=[file_path],
+            format=self.schema,
+            system=self.system_prompt,
+            options={
+                "temperature": 0,
+            },
+        )
+        print(result["response"])
