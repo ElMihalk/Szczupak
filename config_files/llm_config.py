@@ -3,7 +3,7 @@ from typing import List
 
 
 class WordItem(BaseModel):
-    japanes_word: str = Field(description="The word in Japanese kanji or kana.")
+    japanese_word: str = Field(description="The word in Japanese kanji or kana.")
     reading: str = Field(description="The hiragana reading of the word.")
     translation: str = Field(description="The translation of the word.")
 
@@ -23,7 +23,7 @@ class LLMConfig:
         self.model = model
         self.system_prompt = f"""
             You are tasked with reading a PDF and image files contents and providing a json output according to the provided schema and the rules specified below.
-            The PDF files will be passed in form of a string.
+            The PDF files will be passed in form of a string. The image files will be passed as images.
             It is crucial that you extract all the vocabulary items without losses. 
             CRITICAL: Each item must have exactly 3 fields named exactly: "japanese_word", "reading" and "translation".
             You must ensure that the translation part is in {self.translation_language}.

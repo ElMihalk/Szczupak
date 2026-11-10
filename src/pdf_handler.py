@@ -3,8 +3,6 @@ import pypdf
 
 
 class PDFHandler(FileHandler):
-    def __init__(self):
-        super().__init__()
 
     def extract_content(self) -> None:
         try:
