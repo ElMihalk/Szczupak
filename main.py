@@ -2,12 +2,7 @@ from src.llm_client import OllamaClient
 from config_files.llm_config import LLMConfig, VocabularyOutput
 from src.pdf_handler import PDFHandler
 from src.image_handler import ImageHandler
-from pathlib import Path
-
-
-def collect_files(suffix: str = ".pdf"):
-    return Path("./source_files").glob(f"**/*{suffix}")
-
+from src.file_handler import collect_files
 
 if __name__ == "__main__":
     model_conf = LLMConfig(translation_language="Polish")
