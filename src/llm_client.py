@@ -23,9 +23,11 @@ class OllamaClient:
             system=self.system_prompt,
             options={
                 "temperature": 0,
+                "num_ctx": 16384,
             },
         )
         print(result["response"])
+        return result["response"]
 
     def transform_image_content(self, file_path: str):
         prompt = f"""
@@ -39,6 +41,8 @@ class OllamaClient:
             system=self.system_prompt,
             options={
                 "temperature": 0,
+                "num_ctx": 16384,
             },
         )
         print(result["response"])
+        return result["response"]

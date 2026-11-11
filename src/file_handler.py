@@ -1,5 +1,8 @@
 from abc import ABC, abstractmethod
+from pathlib import Path
 
+def collect_files(suffix: str = ".pdf"):
+    return Path("./source_files").glob(f"**/*{suffix}")
 
 class FileHandler(ABC):
     def __init__(self, source_file: str):
