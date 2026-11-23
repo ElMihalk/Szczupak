@@ -1,5 +1,5 @@
 import ollama
-
+import json
 
 class OllamaClient:
     def __init__(
@@ -9,7 +9,7 @@ class OllamaClient:
         self.system_prompt = system_prompt
         self.schema = schema
 
-    def transform_pdf_content(self, file_content: str):
+    def transform_pdf_content(self, file_content: str, json_output: bool = True):
         prompt = f"""
         Process this file:
         [FILE CONTENT START]
@@ -26,10 +26,12 @@ class OllamaClient:
                 "num_ctx": 16384,
             },
         )
-        print(result["response"])
-        return result["response"]
+        if json_output:
+            return json.loads(result["response"])
+        else:
+            return result["response"]
 
-    def transform_image_content(self, file_path: str):
+    def transform_image_content(self, file_path: str, json_output: bool = True):
         prompt = f"""
         Process this file:
         """
@@ -44,5 +46,7 @@ class OllamaClient:
                 "num_ctx": 16384,
             },
         )
-        print(result["response"])
-        return result["response"]
+        if json_output:
+            return json.loads(result["response"])
+        else:
+            return result["response"]

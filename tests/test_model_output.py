@@ -24,7 +24,7 @@ class TestModelOutput:
         for file_path in collect_files(suffix="Example_1.pdf"):
             obj = PDFHandler(file_path)
             obj.extract_content()
-            result = ollama_client.transform_pdf_content(obj.content)
+            result = ollama_client.transform_pdf_content(obj.content, json_output=False)
 
         assert follows_schema(result, VocabularyOutput)
 
@@ -38,6 +38,6 @@ class TestModelOutput:
         for file_path in collect_files(suffix="Example_6.png"):
             obj = ImageHandler(file_path)
             obj.extract_content()
-            result = ollama_client.transform_image_content(obj.content)
+            result = ollama_client.transform_image_content(obj.content, json_output=False)
 
         assert follows_schema(result, VocabularyOutput)
