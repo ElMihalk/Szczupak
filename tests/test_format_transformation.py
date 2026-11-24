@@ -1,4 +1,4 @@
-from output_handler import json2tsv
+from output import json2tsv
 
 class TestFormatTransformation():
 

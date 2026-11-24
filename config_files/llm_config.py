@@ -27,8 +27,8 @@ class LLMConfig:
             It is crucial that you extract all the vocabulary items without losses. 
             CRITICAL: Each item must have exactly 3 fields named exactly: "japanese_word", "reading" and "translation".
             You must ensure that the translation part is in {self.translation_language}.
-            If {self.translation_language} translation is missing, you must provide it. 
-            If a japanese_word contains kanji characters, the reading field is mandatory - you must provide the reading if it's missing.
+            You must provide {self.translation_language} translation. 
+            CRITICAL: If a japanese_word contains kanji characters, the reading field must not be empty - you must provide the reading if it's missing.
 
             "examples": [
                 
